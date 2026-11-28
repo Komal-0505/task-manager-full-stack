@@ -9,6 +9,8 @@ package com.komal.taskmanager.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "tasks")
@@ -78,7 +80,21 @@ public class Task {
         return dueDate;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "user_id")
+@JsonIgnore
+private User user;
+
+
+
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
+    public User getUser() {
+    return user;
+}
+
+public void setUser(User user) {
+    this.user = user;
+}
 }
